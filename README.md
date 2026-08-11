@@ -4,7 +4,7 @@
 
 Companion replication code for the manuscript:
 
-> *"A Phase-Aware Socio-Technical Framework for Cybersecurity Awareness in Digital Transformation: Analytical Model and Assumption-Stress Evaluation"*
+> *"Beyond Technological Defenses: A Phase-Aware Socio-Technical Framework for Cybersecurity Awareness in Digital Transformation"*
 
 > **Anonymized for review.** Author and affiliation information is withheld to preserve double-blind review. Identifying metadata will be added on acceptance.
 
@@ -38,7 +38,8 @@ ST-CAF/
 ├── src/
 │   ├── simulate_stcaf_mc.py            # MC reduction, total-order sensitivity, bootstrap, semi-Markov
 │   ├── simulate_stcaf_ctmc_journal.py  # closed-form P_path + counterexample computations
-│   └── phase_ablation.py               # phase-stress generator + scenario ablation
+│   ├── phase_ablation.py               # phase-stress generator + scenario ablation
+│   └── sensitivity_mu2_mu1.py          # reporting-rate asymmetry (mu2/mu1) sensitivity
 ├── tests/
 │   └── test_stcaf_analysis.py          # 8 regression tests (invariants + outputs)
 └── outputs/
@@ -84,6 +85,9 @@ python src/phase_ablation.py --seed 42 --n 100000
 
 # Closed-form pathway probability + Layer-4 counterexample
 python src/simulate_stcaf_ctmc_journal.py
+
+# Reporting-rate asymmetry sensitivity (mu2/mu1) — supports the shared-mu discussion
+python src/sensitivity_mu2_mu1.py
 ```
 
 ### Documented command-line options
