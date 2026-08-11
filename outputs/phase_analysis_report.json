@@ -1,0 +1,119 @@
+{
+  "analysis_type": "conditional_phase_comparison_not_cross_phase_theorem",
+  "exact_condition": "P(right)<P(left) iff alpha_right*beta_right*(alpha_left+mu_left)*(beta_left+mu_left+gamma_left) < alpha_left*beta_left*(alpha_right+mu_right)*(beta_right+mu_right+gamma_right).",
+  "representative_sequence": {
+    "D1": {
+      "alpha": 1.2,
+      "mu": 0.8,
+      "beta": 0.5,
+      "gamma": 0.0,
+      "p_sys": 0.23076923076923075,
+      "p_sys_without_layer4": 0.23076923076923075,
+      "delta4": 0.0,
+      "exposure_factor": 0.6,
+      "former_regularity_margin": 0.3900000000000001
+    },
+    "D2": {
+      "alpha": 0.8,
+      "mu": 1.0,
+      "beta": 1.0,
+      "gamma": 1.0,
+      "p_sys": 0.14814814814814817,
+      "p_sys_without_layer4": 0.22222222222222224,
+      "delta4": 0.07407407407407407,
+      "exposure_factor": 0.4444444444444445,
+      "former_regularity_margin": 1.0
+    },
+    "D3": {
+      "alpha": 0.6,
+      "mu": 1.2,
+      "beta": 2.0,
+      "gamma": 2.0,
+      "p_sys": 0.12820512820512822,
+      "p_sys_without_layer4": 0.20833333333333334,
+      "delta4": 0.08012820512820512,
+      "exposure_factor": 0.33333333333333337,
+      "former_regularity_margin": -0.16000000000000014
+    }
+  },
+  "counterexample_to_former_theorem": {
+    "D1": {
+      "alpha": 0.2,
+      "mu": 0.05,
+      "beta": 0.01,
+      "gamma": 0.0,
+      "p_sys": 0.13333333333333333,
+      "p_sys_without_layer4": 0.13333333333333333,
+      "delta4": 0.0,
+      "exposure_factor": 0.8,
+      "former_regularity_margin": 0.0024000000000000007
+    },
+    "D2": {
+      "alpha": 0.1,
+      "mu": 0.1,
+      "beta": 0.05,
+      "gamma": 1.0,
+      "p_sys": 0.02173913043478261,
+      "p_sys_without_layer4": 0.16666666666666666,
+      "delta4": 0.14492753623188404,
+      "exposure_factor": 0.5,
+      "former_regularity_margin": 0.10750000000000001
+    },
+    "D3": {
+      "alpha": 0.05,
+      "mu": 0.2,
+      "beta": 0.1,
+      "gamma": 2.0,
+      "p_sys": 0.008695652173913045,
+      "p_sys_without_layer4": 0.06666666666666667,
+      "delta4": 0.05797101449275362,
+      "exposure_factor": 0.2,
+      "former_regularity_margin": 0.43000000000000005
+    }
+  },
+  "monotone_stress": {
+    "n": 100000,
+    "seed": 42,
+    "declared_sampling_ranges": {
+      "D1_alpha": [
+        0.5,
+        2.0
+      ],
+      "D1_mu": [
+        0.5,
+        2.0
+      ],
+      "D1_beta": [
+        0.25,
+        1.0
+      ],
+      "phase_multipliers": {
+        "alpha": [
+          0.5,
+          1.0
+        ],
+        "mu": [
+          1.0,
+          2.0
+        ],
+        "beta": [
+          1.0,
+          3.0
+        ],
+        "gamma_D2_over_mu_D2": [
+          0.1,
+          3.0
+        ],
+        "gamma_D3_over_gamma_D2": [
+          1.0,
+          3.0
+        ]
+      }
+    },
+    "fraction_delta4_D3_greater_D2": 0.2671,
+    "fraction_satisfying_former_regularity": 0.70983,
+    "fraction_ordered_given_former_regularity": 0.26317568995393265,
+    "fraction_system_risk_strictly_decreases_each_phase": 0.80372,
+    "claim_boundary": "Frequencies describe the declared scenario generator, not organizations or a population distribution."
+  }
+}
