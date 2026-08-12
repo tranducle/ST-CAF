@@ -22,7 +22,9 @@ phase-indexed continuous-time Markov chain (CTMC). The scripts here:
 2. run the declared dimensionless scenario sweeps (Monte Carlo reduction);
 3. compute Jansen total-order sensitivity indices with bootstrap intervals;
 4. run a matched-mean semi-Markov (Weibull) robustness stress test;
-5. run the phase-stress simulation over three digital-transformation phases.
+5. run the phase-stress simulation over three digital-transformation phases,
+   including the sensitivity of the cross-phase result to the stipulated
+   direction of the lateral-movement rate.
 
 All results are scenario-conditional and **do not estimate a real-world effect
 size**. The incident illustration and standards crosswalk in the manuscript use
@@ -40,6 +42,7 @@ ST-CAF/
 │   ├── simulate_stcaf_ctmc_journal.py  # closed-form P_path + counterexample computations
 │   ├── phase_ablation.py               # phase-stress generator + scenario ablation
 │   └── sensitivity_mu2_mu1.py          # reporting-rate asymmetry (mu2/mu1) sensitivity
+├── conftest.py                         # puts src/ on sys.path for pytest
 ├── tests/
 │   └── test_stcaf_analysis.py          # 8 regression tests (invariants + outputs)
 └── outputs/
@@ -63,13 +66,14 @@ pip install -r requirements.txt
 ```bash
 PYTHONPATH=src python tests/test_stcaf_analysis.py   # standalone runner (8 regression tests, NumPy only)
 # or, if pytest is available:
-PYTHONPATH=src pytest tests/ -v
+pytest tests/ -v
 ```
 
 The standalone runner executes the same 8 regression tests (analytical
-invariants, numeric consistency, and output checks) and requires
-NumPy only. `PYTHONPATH=src` is needed because the scripts live under `src/`
-and the test imports them as top-level modules.
+invariants, numeric consistency, and output checks) and requires NumPy only.
+It needs `PYTHONPATH=src` because the scripts live under `src/` and the test
+imports them as top-level modules; under pytest, `conftest.py` does this for
+you.
 
 ### Regenerate results
 
@@ -100,11 +104,30 @@ python src/sensitivity_mu2_mu1.py
 
 ## Outputs and manuscript mapping
 
+All scripts write their JSON and plots to `outputs/`.
+
 | Script | Output | Manuscript reference |
 |---|---|---|
-| `simulate_stcaf_mc.py` | `mc_report.json` | Scenario sweeps §(reduction factors), Table (Jansen indices), semi-Markov stress |
-| `phase_ablation.py` | `phase_analysis_report.json` | Phase-stress generator and ablation summary |
-| `simulate_stcaf_ctmc_journal.py` | (prints) | Closed-form absorption proposition + Layer-4 counterexample |
+| `simulate_stcaf_mc.py` | `outputs/mc_report.json` | Paired scenario reductions, Jansen total-order indices, matched-mean semi-Markov stress; three-panel range/reference/memoryless figure |
+| `phase_ablation.py` | `outputs/phase_analysis_report.json` | Layer-4 cross-phase section: counterexample, phase-stress frequencies, beta-stipulation sensitivity; phase-exposure figure |
+| `simulate_stcaf_ctmc_journal.py` | (prints; writes a plot) | Closed-form absorption proposition + Layer-4 counterexample |
+| `sensitivity_mu2_mu1.py` | (prints) | Reporting-rate asymmetry discussion |
+
+### Keys inside `outputs/phase_analysis_report.json`
+
+| Key | What it reports |
+|---|---|
+| `exact_condition` | the exact cross-phase comparison criterion |
+| `representative_sequence` | an admissible sequence in which the Layer-4 absolute contribution rises |
+| `counterexample_to_former_theorem` | an admissible sequence in which it falls |
+| `monotone_stress` | frequencies over 100,000 monotone phase sequences, including `fraction_delta4_D3_greater_D2` (absolute scale) and `fraction_relative_layer4_D3_greater_D2` (multiplicative scale) |
+| `beta_stipulation_sensitivity` | the same frequencies when the per-phase beta multiplier is drawn log-uniformly on [1/3, 3] (`two_sided`) or uniformly on [1/3, 1] (`mirrored`) instead of the stipulated [1, 3], at the same seed and draw order |
+
+The `beta_stipulation_sensitivity` block exists because the stipulated
+non-decreasing beta is the direction most favourable to cross-phase ordering on
+the absolute scale: relaxing it lowers that frequency rather than raising it.
+Neither the absolute nor the multiplicative scale orders universally, and the
+manuscript claims no ordering theorem on either.
 
 ## Randomness and precision
 

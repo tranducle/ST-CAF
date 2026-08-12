@@ -74,6 +74,8 @@
   "monotone_stress": {
     "n": 100000,
     "seed": 42,
+    "beta_multiplier_variant": "stipulated",
+    "beta_multiplier_description": "uniform on [1, 3] (non-decreasing beta)",
     "declared_sampling_ranges": {
       "D1_alpha": [
         0.5,
@@ -100,6 +102,7 @@
           1.0,
           3.0
         ],
+        "beta_kind": "uniform",
         "gamma_D2_over_mu_D2": [
           0.1,
           3.0
@@ -114,6 +117,107 @@
     "fraction_satisfying_former_regularity": 0.70983,
     "fraction_ordered_given_former_regularity": 0.26317568995393265,
     "fraction_system_risk_strictly_decreases_each_phase": 0.80372,
+    "fraction_relative_layer4_D3_greater_D2": 0.64766,
     "claim_boundary": "Frequencies describe the declared scenario generator, not organizations or a population distribution."
+  },
+  "beta_stipulation_sensitivity": {
+    "two_sided": {
+      "n": 100000,
+      "seed": 42,
+      "beta_multiplier_variant": "two_sided",
+      "beta_multiplier_description": "log-uniform on [1/3, 3]",
+      "declared_sampling_ranges": {
+        "D1_alpha": [
+          0.5,
+          2.0
+        ],
+        "D1_mu": [
+          0.5,
+          2.0
+        ],
+        "D1_beta": [
+          0.25,
+          1.0
+        ],
+        "phase_multipliers": {
+          "alpha": [
+            0.5,
+            1.0
+          ],
+          "mu": [
+            1.0,
+            2.0
+          ],
+          "beta": [
+            0.3333333333333333,
+            3.0
+          ],
+          "beta_kind": "log_uniform",
+          "gamma_D2_over_mu_D2": [
+            0.1,
+            3.0
+          ],
+          "gamma_D3_over_gamma_D2": [
+            1.0,
+            3.0
+          ]
+        }
+      },
+      "fraction_delta4_D3_greater_D2": 0.17258,
+      "fraction_satisfying_former_regularity": 0.90792,
+      "fraction_ordered_given_former_regularity": 0.16153405586395278,
+      "fraction_system_risk_strictly_decreases_each_phase": 0.91081,
+      "fraction_relative_layer4_D3_greater_D2": 0.78476,
+      "claim_boundary": "Frequencies describe the declared scenario generator, not organizations or a population distribution."
+    },
+    "mirrored": {
+      "n": 100000,
+      "seed": 42,
+      "beta_multiplier_variant": "mirrored",
+      "beta_multiplier_description": "uniform on [1/3, 1] (non-increasing beta)",
+      "declared_sampling_ranges": {
+        "D1_alpha": [
+          0.5,
+          2.0
+        ],
+        "D1_mu": [
+          0.5,
+          2.0
+        ],
+        "D1_beta": [
+          0.25,
+          1.0
+        ],
+        "phase_multipliers": {
+          "alpha": [
+            0.5,
+            1.0
+          ],
+          "mu": [
+            1.0,
+            2.0
+          ],
+          "beta": [
+            0.3333333333333333,
+            1.0
+          ],
+          "beta_kind": "uniform",
+          "gamma_D2_over_mu_D2": [
+            0.1,
+            3.0
+          ],
+          "gamma_D3_over_gamma_D2": [
+            1.0,
+            3.0
+          ]
+        }
+      },
+      "fraction_delta4_D3_greater_D2": 0.043,
+      "fraction_satisfying_former_regularity": 0.99814,
+      "fraction_ordered_given_former_regularity": 0.042579197306991,
+      "fraction_system_risk_strictly_decreases_each_phase": 1.0,
+      "fraction_relative_layer4_D3_greater_D2": 0.82916,
+      "claim_boundary": "Frequencies describe the declared scenario generator, not organizations or a population distribution."
+    }
   }
 }

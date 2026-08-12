@@ -31,8 +31,16 @@ import numpy as np
 logger = logging.getLogger(__name__)
 
 ROOT: Final[Path] = Path(__file__).parent
-FIGURE_PATH: Final[Path] = ROOT / "figures" / "ST_CAF_MC_Distributions.pdf"
-REPORT_PATH: Final[Path] = ROOT / "mc_report.json"
+# In the packaged deposit the code sits in src/ beside sibling outputs/ and
+# figures/ directories; in the working tree it sits at the project root. Resolve
+# the destinations against whichever layout is present so both reproduce.
+_BASE: Final[Path] = ROOT.parent if (ROOT.parent / "outputs").is_dir() else ROOT
+FIGURE_PATH: Final[Path] = (
+    _BASE / "figures" if (_BASE / "figures").is_dir() else _BASE / "outputs"
+) / "ST_CAF_MC_Distributions.pdf"
+REPORT_PATH: Final[Path] = (
+    _BASE / "outputs" if (_BASE / "outputs").is_dir() else _BASE
+) / "mc_report.json"
 
 
 @dataclass(frozen=True)
