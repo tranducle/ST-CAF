@@ -48,7 +48,14 @@ import matplotlib.pyplot as plt  # noqa: E402  (backend must be set first)
 logger = logging.getLogger(__name__)
 
 HORIZON_HOURS: Final[float] = 24.0
-OUTPUT_PDF: Final[Path] = Path(__file__).with_name("ST_CAF_Simulation.pdf")
+_HERE: Final[Path] = Path(__file__).parent
+# In the packaged deposit the code sits in src/ beside a sibling outputs/
+# directory; in the working tree it sits at the project root. Resolve the
+# destination against whichever layout is present so both reproduce.
+_OUT_DIR: Final[Path] = (
+    _HERE.parent / "outputs" if (_HERE.parent / "outputs").is_dir() else _HERE
+)
+OUTPUT_PDF: Final[Path] = _OUT_DIR / "ST_CAF_Simulation.pdf"
 
 
 @dataclass(frozen=True)
